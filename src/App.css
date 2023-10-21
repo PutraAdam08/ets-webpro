@@ -1,11 +1,12 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: rgb(16, 13, 13);
   background-image: linear-gradient(79deg, navy, lightblue 50%, white);
+  margin: 0px;
 }
 
 .auth-form-container, .login-form, .register-form {
@@ -20,7 +21,7 @@
   margin: 0.5rem;
 }
 
-label {
+/*label {
   text-align: left;
   padding: 0.25rem 0;
 }
@@ -38,7 +39,7 @@ button {
   padding: 20px;
   border-radius: 10px;
   cursor: pointer;
-}
+}*/
 
 .link-bin {
   background: none;

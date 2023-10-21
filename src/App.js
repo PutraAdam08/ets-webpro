@@ -5,6 +5,12 @@ import { Register } from './Register';
 
 
 function App() {
+  const [currentForm, setCurrentForm] = useState('login');
+
+const toggleForm = (formname) => {
+  setCurrentForm(formname);
+}
+
   return (
     <div className="App">
       {
