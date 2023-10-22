@@ -20,8 +20,11 @@ export const Login = (props) => {
 
     return(
         <>
-            <Card className="p-5" style={{width: '50 rem'}}>
-                <Form>
+            <Card style={{ width: '25rem' }} className="p-5">
+                <Form >
+                    <Row>
+                        <h1 className="mb-5 text-center">Welcome</h1>
+                    </Row>
                     <Row>
                         <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
                             <Form.Label>Email address</Form.Label>
@@ -47,7 +50,7 @@ export const Login = (props) => {
                             </Button>
                     </div>
                     <Row>
-                        <button className="link-bin mt-3" onClick={() => props.onFormSwitch('register')}>Don't have an account? register</button>
+                        <Button className="mt-3 text-left" variant="link">Forget password?</Button>
                     </Row>
                 </Form>
             </Card>
