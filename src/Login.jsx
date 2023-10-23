@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
+import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
  
 export const Login = (props) => {
@@ -19,8 +20,8 @@ export const Login = (props) => {
     }
 
     return(
-        <>
-            <Card style={{ width: '25rem' }} className="p-5">
+        <Container className="my-5 d-flex flex-row justify-content-center">
+            <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
                 <Form >
                     <Row>
                         <h1 className="mb-5 text-center">Welcome</h1>
@@ -54,7 +55,7 @@ export const Login = (props) => {
                     </Row>
                 </Form>
             </Card>
-        </>
+        </Container>
         /*<div className="auth-form-container">
             <h2>login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
