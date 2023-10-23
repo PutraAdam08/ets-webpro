@@ -5,7 +5,6 @@ import { Register } from './Register';
 import BasicNavbar from './component/navbar';
 import Homepage from './pages/Homepage';
 
-
 function App() {
   const [currentForm, setCurrentForm] = useState('login');
 
