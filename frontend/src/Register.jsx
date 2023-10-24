@@ -8,19 +8,7 @@ import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "react-bootstrap";
 
-export const Register = (props) => {
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [Fname] = useState('');
-    const [Lname] = useState('');
-    
-    
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);
-    }
+function Register() {
 
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
@@ -71,7 +59,7 @@ export const Register = (props) => {
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
-                            <Button variant="secondary" type="submit" onClick={() => props.onFormSwitch('login')}>
+                            <Button variant="secondary" type="submit">
                                 Log in
                             </Button>
                     </div>
@@ -95,3 +83,5 @@ export const Register = (props) => {
         </div>*/
     )
 }
+
+export default Register;
