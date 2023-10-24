@@ -10,7 +10,10 @@ const db = mysql.createConnection({
     database: "databaseets"
 });
 
-
+app.post('/customer', (req, res) => {
+    const sql = "SELECT * FROM customer WHERE Email =? AND Password =?";
+    
+})
 
 app.get("/api", (req, res) => {
     return res.json({message: "this nut"});
