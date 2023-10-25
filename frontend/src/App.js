@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import { Login } from './Login';
-import { Register } from './Register';
+import Login from './Login';
+import Register from './Register';
 import BasicNavbar from './component/navbar';
 import Homepage from './pages/Homepage';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
@@ -11,14 +11,15 @@ function App() {
 
 const toggleForm = (formname) => {
   setCurrentForm(formname);
-}
+  }
 
   return (
     <div className="App">
       {
         <BrowserRouter>
           <Routes>
-            <Route path = '/'></Route>
+            <Route path = '/' element={Login}></Route>
+            <Route path = '/Register' element={Register}></Route>
           </Routes>
         </BrowserRouter>
 

@@ -1,4 +1,5 @@
 import react, {useState} from "react";
+import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -6,23 +7,34 @@ import Row from 'react-bootstrap/Row';
 import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
 import { Container } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
  
-export const Login = (props) => {
-
+const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    const [msg, setMsg] = useState('');
+    const history = useHistory();
 
-    const handleSubmit = (e) => {
+    const Auth = async (e) => {
         e.preventDefault();
-        console.log(email);
+        try {
+            await axios.post('http://localhost:5000/login', {
+                email: email,
+                password: password
+            });
+            history.push("/dashboard");
+        } catch (error) {
+            if (error.response) {
+                setMsg(error.response.data.msg);
+            }
+        }
     }
 
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
             <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
-                <Form >
+                <Form onSubmit={handleSubmit}>
                     <Row>
                         <h1 className="mb-5 text-center">Welcome</h1>
                     </Row>
@@ -30,7 +42,7 @@ export const Login = (props) => {
                         <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email"/> onChange={(e) => setEmail(e.target.value)}
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -38,7 +50,7 @@ export const Login = (props) => {
                         <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -46,26 +58,14 @@ export const Login = (props) => {
                             <Button variant="secondary" type="submit">
                                 Log in
                             </Button>
-                            <Button variant="primary" type="submit" onClick={() => props.onFormSwitch('register')}>
+                            <Button variant="primary" type="submit">
                                 Sign in
                             </Button>
                     </div>
-                    <Row>
-                        <Button className="mt-3 text-left" variant="link">Forget password?</Button>
-                    </Row>
                 </Form>
             </Card>
         </Container>
-        /*<div className="auth-form-container">
-            <h2>login</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="Email">Email</label>
-        <input value = {email} onChange={(e) => setEmail(e.target.value)} email = "Email" id = "email" placeholder="email"/>
-        <label htmlFor="Password">Password</label>
-        <input value = {password} onChange={(e) => setPassword(e.target.value)} password = "Password" id = "password" placeholder="password"/>
-        <button type="submit">Log in</button>
-        </form>
-        <button className="link-bin" onClick={() => props.onFormSwitch('register')}>Don't have an account? register</button>
-        </div>*/
-    )
+    );
 }
+
+export default Login
