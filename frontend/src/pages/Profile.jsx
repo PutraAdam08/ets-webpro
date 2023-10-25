@@ -71,7 +71,7 @@ class HomeProfile extends Component {
               </Form.Group>
             </Form>
             <div className="text-center">
-              <Button variant="primary" className="mt-3">Edit</Button>
+              <Button variant="primary" className="mt-2">Edit</Button>
             </div>
           </Card.Body>
         </Card>
