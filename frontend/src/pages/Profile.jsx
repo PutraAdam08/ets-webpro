@@ -11,8 +11,8 @@ class HomeProfile extends Component {
     super(props);
     this.state = {
       imageSrc: 'path_to_default_image.jpg', // Set a default image source
-      name: 'John Doe',
-      email: 'johndoe@example.com',
+      name: '',
+      email: '',
     };
   }
 
