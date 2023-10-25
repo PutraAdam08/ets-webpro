@@ -14,6 +14,7 @@ function BasicNavbar() {
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Recipe</Nav.Link>
             <Nav.Link href="#link">Profile</Nav.Link>
+            <Nav.Link href="#link"><box-icon name='power-off'></box-icon></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

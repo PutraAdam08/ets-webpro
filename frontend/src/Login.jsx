@@ -1,5 +1,5 @@
 import react, {useState} from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -9,12 +9,13 @@ import Card from "react-bootstrap/Card";
 import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Register from "./Register";
  
 const Login = () =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
-    const history = useHistory();
+    const history = useNavigate();
 
     const Auth = async (e) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ const Login = () =>{
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
             <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={Auth}>
                     <Row>
                         <h1 className="mb-5 text-center">Welcome</h1>
                     </Row>
@@ -42,7 +43,7 @@ const Login = () =>{
                         <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email"/> onChange={(e) => setEmail(e.target.value)}
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/> 
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -50,7 +51,7 @@ const Login = () =>{
                         <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
