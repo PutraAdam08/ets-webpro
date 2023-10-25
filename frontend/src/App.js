@@ -28,7 +28,5 @@ const toggleForm = (formname) => {
     </div>
   );
 }
-      /*currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm}/> */
 
-      /**/
 export default App;
