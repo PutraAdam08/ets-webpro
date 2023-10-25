@@ -8,7 +8,32 @@ import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "react-bootstrap";
 
-function Register() {
+const Register = () => {
+
+    const [fname, setFName] = useState('');
+    const [lname, setLName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confPassword, setConfPassword] = useState('');
+    const [msg, setMsg] = useState('');
+    const history = useHistory();
+ 
+    const Register = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('http://localhost:5000/users', {
+                fname: fname,
+                lname: lname,
+                email: email,
+                password: password,
+                confPassword: confPassword
+            });
+            history.push("/");
+        } catch (error) {
+            if (error.response) {
+                setMsg(error.response.data.msg);
+            }
+        }
+    }
 
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
@@ -21,13 +46,13 @@ function Register() {
                         <Form.Group as = {Col}  controlId="Fname">
                             <Form.Label>First name</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="text" placeholder="First name" />
+                            <Form.Control type="text" placeholder="First name" value={fname} onChange={(e) => setFName(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                         <Form.Group as = {Col}  controlId="Lname">
                             <Form.Label>Last name</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="text" placeholder="Last name" />
+                            <Form.Control type="text" placeholder="Last name" value={lname} onChange={(e) => setLName(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -43,7 +68,7 @@ function Register() {
                         <Form.Group as = {Col} className="mb-3" controlId="email">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -51,7 +76,15 @@ function Register() {
                         <Form.Group as = {Col} className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        </InputGroup>
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Form.Group as = {Col} className="mb-3" controlId="password">
+                            <Form.Label>Confirm password</Form.Label>
+                        <InputGroup size="sm">
+                            <Form.Control type="password" placeholder="Password"  value={confPassword} onChange={(e) => setConfPassword(e.target.value)} />
                         </InputGroup>
                         </Form.Group>
                     </Row>

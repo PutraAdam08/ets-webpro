@@ -1,4 +1,5 @@
 import react, {useState} from "react";
+import { useHistory } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -9,8 +10,26 @@ import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
  
-function Login()
-{
+const Login = () =>{
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [msg, setMsg] = useState('');
+    const history = useHistory();
+
+    const Auth = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('http://localhost:5000/login', {
+                email: email,
+                password: password
+            });
+            history.push("/dashboard");
+        } catch (error) {
+            if (error.response) {
+                setMsg(error.response.data.msg);
+            }
+        }
+    }
 
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
@@ -23,7 +42,7 @@ function Login()
                         <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email"/>
+                            <Form.Control type="email" placeholder="Enter email"/> onChange={(e) => setEmail(e.target.value)}
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -31,7 +50,7 @@ function Login()
                         <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password"/>
+                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
