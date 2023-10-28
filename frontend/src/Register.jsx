@@ -12,35 +12,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "react-bootstrap";
 
 const Register = () => {
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confPassword, setConfPassword] = useState('');
-    const [msg, setMsg] = useState('');
-    const history = useNavigate();
- 
-    const Register = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/users', {
-                name: name,
-                email: email,
-                password: password,
-                confPassword: confPassword
-            });
-            history.push("/");
-        } catch (error) {
-            if (error.response) {
-                setMsg(error.response.data.msg);
-            }
-        }
-    }
-
+       
     return (
         <Container className="my-5 d-flex flex-row justify-content-center">
             <Card  style={{ width: '30rem', height:'35rem' }} className="p-5 m-5">
-                <Form className="my-2" onSubmit={Register}>
+                <Form className="my-2">
                     <Row>
                         <h1 className="mb-5 text-center">Registration</h1>
                     </Row>
@@ -48,7 +24,7 @@ const Register = () => {
                         <Form.Group as = {Col}  controlId="name">
                             <Form.Label>Name</Form.Label>
                             <InputGroup size="sm">
-                                <Form.Control type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+                                <Form.Control type="text" placeholder="Name"/>
                             </InputGroup>
                         </Form.Group>
                     </Row>
@@ -56,16 +32,15 @@ const Register = () => {
                         <Form.Group as = {Col} className="mb-3" controlId="email">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <Form.Control type="email" placeholder="Enter email"/>
                         </InputGroup>
-                        <p className="has-text-centered">{msg}</p>
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group as = {Col} className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <Form.Control type="password" placeholder="Password" />
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -73,7 +48,7 @@ const Register = () => {
                         <Form.Group as = {Col} className="mb-3" controlId="password">
                             <Form.Label>Confirm password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password"  value={confPassword} onChange={(e) => setConfPassword(e.target.value)} />
+                            <Form.Control type="password" placeholder="Password" />
                         </InputGroup>
                         </Form.Group>
                     </Row>

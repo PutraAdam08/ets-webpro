@@ -12,30 +12,12 @@ import axios from 'axios';
 import Register from "./Register";
  
 const Login = () =>{
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [msg, setMsg] = useState('');
-    const history = useNavigate();
-
-    const Auth = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/login', {
-                email: email,
-                password: password
-            });
-            history.push("/dashboard");
-        } catch (error) {
-            if (error.response) {
-                setMsg(error.response.data.msg);
-            }
-        }
-    }
+   
 
     return(
         <Container className="my-5 d-flex flex-row justify-content-center">
             <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
-                <Form onSubmit={Auth}>
+                <Form>
                     <Row>
                         <h1 className="mb-5 text-center">Welcome</h1>
                     </Row>
@@ -43,7 +25,7 @@ const Login = () =>{
                         <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
                             <Form.Label>Email address</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/> 
+                            <Form.Control type="email" placeholder="Enter email" /> 
                         </InputGroup>
                         </Form.Group>
                     </Row>
@@ -51,7 +33,7 @@ const Login = () =>{
                         <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
                             <Form.Label>Password</Form.Label>
                         <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <Form.Control type="password" placeholder="Password"/>
                         </InputGroup>
                         </Form.Group>
                     </Row>
