@@ -4,31 +4,19 @@ import Login from './Login';
 import Register from './Register';
 import BasicNavbar from './component/navbar';
 import Homepage from './pages/Homepage';
+import RecipeForm from './pages/AddEdit';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+//aSimport Recipes from './pages/Recipe';
 
 function App() {
-  const [currentForm, setCurrentForm] = useState('login');
-
-const toggleForm = (formname) => {
-  setCurrentForm(formname);
-  }
 
   return (
     <div className="App">
-      {
-        <BrowserRouter>
-          <Routes>
-            <Route path = '/' element={Login}></Route>
-            <Route path = '/Register' element={Register}></Route>
-          </Routes>
-        </BrowserRouter>
-
-        
-      }
+      <Register/>
     </div>
   );
 }
-      /*currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm}/> */
+      /*currentForm === "login" ? <Login onFormRoutes={toggleForm} /> : <Register onFormRoutes={toggleForm}/> */
 
       /**/
 export default App;
