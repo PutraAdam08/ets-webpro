@@ -1,11 +1,10 @@
 import Users from "../models/UserModel.js";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
  
 export const getUser = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes:['id','Name','Email']
+            attributes:['Name','Email']
         });
         res.json(users);
     } catch (error) {
@@ -36,15 +35,15 @@ export const Register = async(req, res) => {
  
 export const Login = async(req, res) => {
     try {
-        const user = await Users.findOne({
+        const user = await Users.findAll({
             where:{
                 Email: req.body.Email,
                 Password: req.body.Password
             }
         });
         if(!user) return res.status(400).json({msg: "Wrong Username or Password"});
-        const Name = user.Name;
-        const Email = user.Email;
+        const Name = user[0].Name;
+        const Email = user[0].Email;
         //return res.json({msg: "Working", Name});
         const accessToken = jwt.sign({Name, Email}, process.env.ACCESS_TOKEN_SECRET,{
             expiresIn: '15s'

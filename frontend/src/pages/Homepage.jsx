@@ -9,14 +9,12 @@ import Carousel from 'react-bootstrap/Carousel';
 import 'boxicons';
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-
 const Homepage = () => {
     const [Name, setName] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
-    const history = useNavigate();
+    const navigate = useNavigate();
  
     useEffect(() => {
         refreshToken();
@@ -28,11 +26,11 @@ const Homepage = () => {
             const response = await axios.get('http://localhost:5000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.Name);
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
-                history.push("/homepages");
+                navigate("/login");
             }
         }
     }

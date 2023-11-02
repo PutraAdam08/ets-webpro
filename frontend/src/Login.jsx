@@ -1,5 +1,5 @@
 import react, {Component, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -15,7 +15,7 @@ const Login = () => {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
  
     const Auth = async (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const Login = () => {
                 Email: Email,
                 Password: Password
             });
-            history.push("/homepages");
+            navigate("/homepages");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);
@@ -69,7 +69,7 @@ const Login = () => {
                                 <Button variant="secondary" type="submit">
                                     Log in
                                 </Button>
-                                <Button variant="primary" onClick={event =>  window.location.href='/register'}>
+                                <Button variant="primary" onClick={event =>  window.location.href='/'}>
                                     Sign in
                                 </Button>
                         </div>

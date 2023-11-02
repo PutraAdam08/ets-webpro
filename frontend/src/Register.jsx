@@ -1,7 +1,7 @@
 import react, {useState} from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -17,7 +17,7 @@ const Register = () =>{
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
  
     const Register = async (e) => {
         e.preventDefault();
@@ -27,7 +27,7 @@ const Register = () =>{
                 Email: Email,
                 Password: Password
             });
-            history.push("/");
+            navigate.push("/login");
 
         } catch (error) {
             if (error.response) {

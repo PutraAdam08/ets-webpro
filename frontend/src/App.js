@@ -14,7 +14,7 @@ function App () {
     return (
           <BrowserRouter>
             <Routes>
-              <Route exact path="/register" element={<Register/>}>
+              <Route exact path="/" element={<Register/>}>
                 
               </Route>
               <Route path="/login" element={<Login/>}>
