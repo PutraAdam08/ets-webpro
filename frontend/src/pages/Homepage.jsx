@@ -1,16 +1,20 @@
+import react,{useState, useEffect} from 'react';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
 import { Container } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from "react-bootstrap/Card";
 import Carousel from 'react-bootstrap/Carousel';
 import 'boxicons';
+import React, { Component } from "react";
 
-function Homepage() {
-
-    const [name, setName] = useState('');
+const Homepage = () => {
+    const [Name, setName] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
  
     useEffect(() => {
         refreshToken();
@@ -22,11 +26,11 @@ function Homepage() {
             const response = await axios.get('http://localhost:5000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.Name);
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
-                history.push("/");
+                navigate("/login");
             }
         }
     }
@@ -56,7 +60,6 @@ function Homepage() {
         });
         setUsers(response.data);
     }
-
     return (
         <>
             <div className="container-fluid">
@@ -115,4 +118,5 @@ function Homepage() {
         </>
     );
 }
+
 export default Homepage;
