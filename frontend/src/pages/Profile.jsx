@@ -38,7 +38,7 @@ class HomeProfile extends Component {
             <Card style={{ height: '100%' }}>
               <Card.Body style={{ height: '100%' }}>
                 <div className="text-center">
-                  <h3>My Profile</h3>
+                  <h3>MyProfile</h3>
                 </div>
                 <Form>
                   <Form.Group controlId="FormName">
