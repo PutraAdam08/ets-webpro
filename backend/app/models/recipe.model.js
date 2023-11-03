@@ -1,4 +1,3 @@
-const sequelize = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
     const Recipe = sequelize.define("recipes", {
         id: {
@@ -11,11 +10,15 @@ module.exports = (sequelize, Sequelize) => {
             allowNull:false,
             },
         Ingridient: {
-            type: Sequelize.STRING(36),
+            type: Sequelize.TEXT,
             allowNull:false,
-            },        
+            },
+        Step: {
+            type: Sequelize.TEXT,
+            allowNull:false,
+            },
         RecipeKind: {
-            type: Sequelize.STRING(6),
+            type: Sequelize.STRING(8),
             allowNull:false
             }
 
