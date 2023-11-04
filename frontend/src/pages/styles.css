@@ -1,0 +1,10 @@
+.custom-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 33.33%;
+    background-color: #f0f0f0; /* Set your desired background color */
+    overflow: auto; /* Enable scrolling if content exceeds container height */
+  }
+  
