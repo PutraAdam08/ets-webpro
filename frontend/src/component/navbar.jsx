@@ -18,7 +18,7 @@ function BasicNavbar() {
   }
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-secondary" sticky='top'>
       <Container>
         <Navbar.Brand href="#home">Recipe.Finder</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
