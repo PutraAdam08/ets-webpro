@@ -6,6 +6,7 @@ import BasicNavbar from './component/navbar';
 import Homepage from './pages/Homepage';
 import RecipeForm from './pages/AddEdit';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomeProfile from './pages/Profile';
 //import Recipes from './pages/Recipe';
 
 function App () {
@@ -15,13 +16,16 @@ function App () {
           <BrowserRouter>
             <Routes>
               <Route exact path="/" element={<Register/>}>
-                
               </Route>
               <Route path="/login" element={<Login/>}>
               </Route>
               <Route path="/homepages" element={<><BasicNavbar/> <Homepage/></>}>
               </Route>
+              <Route path="/profiles" element={<><BasicNavbar/> <HomeProfile/></>}>
+              </Route>
             </Routes>
           </BrowserRouter>
     );
 }
+
+export default App;

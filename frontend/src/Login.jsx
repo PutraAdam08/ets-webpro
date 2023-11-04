@@ -33,49 +33,51 @@ const Login = () => {
     }
     
         return(
-            <Container className="my-5 d-flex flex-row justify-content-center">
-                <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
-                    <Form onSubmit={Auth}>
-                        <Row>
-                            <h1 className="mb-5 text-center">Welcome</h1>
-                        </Row>
-                        <Row>
-                            <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
-                                <Form.Label>Email address</Form.Label>
-                            <InputGroup size="sm">
-                                <Form.Control 
-                                    type="email" 
-                                    placeholder="Enter email" 
-                                    name="Email"
-                                    value={Email}
-                                    onChange={(e) => setEmail(e.target.value)}
+            <div className="App login-form">
+                <Container className="my-5 d-flex flex-row justify-content-center">
+                    <Card style={{ width: '25rem', height:'30rem' }} className="p-5 my-5">
+                        <Form onSubmit={Auth}>
+                            <Row>
+                                <h1 className="mb-5 text-center">Welcome</h1>
+                            </Row>
+                            <Row>
+                                <Form.Group as = {Col} className="mb-3" controlId="formGridEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                <InputGroup size="sm">
+                                    <Form.Control 
+                                        type="email" 
+                                        placeholder="Enter email" 
+                                        name="Email"
+                                        value={Email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </InputGroup>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
+                                    <Form.Label>Password</Form.Label>
+                                <InputGroup size="sm">
+                                <Form.Control type="password" placeholder="Password"
+                                    name="Password"
+                                    value={Password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
-                            </InputGroup>
-                            </Form.Group>
-                        </Row>
-                        <Row>
-                            <Form.Group as = {Col} className="mb-3" controlId="formGridPassword">
-                                <Form.Label>Password</Form.Label>
-                            <InputGroup size="sm">
-                            <Form.Control type="password" placeholder="Password"
-                                name="Password"
-                                value={Password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            </InputGroup>
-                            </Form.Group>
-                        </Row>
-                        <div className="d-flex flex-row justify-content-center gap-4 my-2">
-                                <Button variant="secondary" type="submit">
-                                    Log in
-                                </Button>
-                                <Button variant="primary" onClick={event =>  window.location.href='/'}>
-                                    Sign in
-                                </Button>
-                        </div>
-                    </Form>
-                </Card>
-            </Container>
+                                </InputGroup>
+                                </Form.Group>
+                            </Row>
+                            <div className="d-flex flex-row justify-content-center gap-4 my-2">
+                                    <Button variant="secondary" type="submit">
+                                        Log in
+                                    </Button>
+                                    <Button variant="primary" onClick={event =>  window.location.href='/'}>
+                                        Sign in
+                                    </Button>
+                            </div>
+                        </Form>
+                    </Card>
+                </Container>
+            </div>
         );
 }
 
