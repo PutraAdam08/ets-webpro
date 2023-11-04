@@ -2,12 +2,9 @@ import react,{useState, useEffect} from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
-import { Container } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import Card from "react-bootstrap/Card";
 import Carousel from 'react-bootstrap/Carousel';
 import 'boxicons';
-import React, { Component } from "react";
 
 const Homepage = () => {
     const [Name, setName] = useState('');
@@ -61,7 +58,7 @@ const Homepage = () => {
         setUsers(response.data);
     }
     return (
-        <>
+        <div className='App'>
             <div className="container-fluid">
                 <div className="row my-5"></div>
                 <div className="row justify-content-center">
@@ -115,7 +112,7 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
