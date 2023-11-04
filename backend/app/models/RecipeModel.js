@@ -20,7 +20,15 @@ module.exports = (sequelize, Sequelize) => {
         RecipeKind: {
             type: Sequelize.STRING(8),
             allowNull:false
+            },
+        UserEmail: {
+            type: sequelize.STRING(36),
+            allowNull:false,
+            reference:{
+                model:'users',
+                key:'Email'
             }
+        }
 
     });
   
