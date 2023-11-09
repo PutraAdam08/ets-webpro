@@ -1,5 +1,4 @@
 import react, {useState} from "react";
-import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -10,7 +9,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "react-bootstrap";
-import AuthService from "./services/auth.service";
 
 const Register = () =>{
     const [Name, setName] = useState('');
@@ -27,7 +25,7 @@ const Register = () =>{
                 Email: Email,
                 Password: Password
             });
-            navigate.push("/login");
+            navigate("/login");
 
         } catch (error) {
             if (error.response) {

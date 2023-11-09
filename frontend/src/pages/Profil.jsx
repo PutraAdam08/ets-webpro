@@ -1,36 +1,68 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import './styles.css';
 
-class HomeProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      imageSrc: 'path_to_default_image.jpg', // Set a default image source
-      name: '',
-      email: '',
-    };
-  }
-
-  handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.setState({ imageSrc: e.target.result });
-      };
-
-      reader.readAsDataURL(file);
+const HomeProfile = () => {
+    const [Name, setName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
+    const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        refreshToken();
+        getUsers();
+    }, []);
+ 
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/token');
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setName(decoded.Name);
+            setEmail(decoded.Email);
+            setExpire(decoded.exp);
+            console.log(Name);
+        } catch (error) {
+            if (error.response) {
+                navigate("/login");
+            }
+        }
     }
-  };
-
-  render() {
+ 
+    const axiosJWT = axios.create();
+ 
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime()) {
+            const response = await axios.get('http://localhost:5000/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setEmail(decoded.Email);
+            setExpire(decoded.exp);
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+ 
+    const getUsers = async () => {
+        const response = await axiosJWT.get('http://localhost:5000/users', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        setUsers(response.data);
+    }
     return (
       <div className='App'>
         <div className='container-fluid'>
@@ -44,13 +76,9 @@ class HomeProfile extends Component {
                         <Row>
                           <Col>
                             <Form.Label>Name</Form.Label>
-                            <Form.Control
+                            <Form.Control disabled
                               type="text"
-                              placeholder="Enter name"
-                              value={this.state.name}
-                              onChange={(e) =>
-                                this.setState({ name: e.target.value })
-                              }
+                              placeholder={Name}
                             />
                           </Col>
                         </Row>
@@ -59,20 +87,16 @@ class HomeProfile extends Component {
                         <Row>
                           <Col>
                             <Form.Label>Email</Form.Label>
-                            <Form.Control
+                            <Form.Control disabled
                               type="email"
-                              placeholder="Enter email"
-                              value={this.state.email}
-                              onChange={(e) =>
-                                this.setState({ email: e.target.value })
-                              }
+                              placeholder={Email}
                             />
                           </Col>
                         </Row>
                       </Form.Group>
                     </Form>
                     <div className="text-center">
-                      <Button variant="primary" className="mt-2">
+                      <Button variant="primary" className="mt-2" onClick={event => window.location.href='/ProfileEdit/${Email}'}>
                         Edit
                       </Button>
                     </div>
@@ -102,7 +126,6 @@ class HomeProfile extends Component {
         </div>
       </div>
     );
-  }
 }
 
 export default HomeProfile;
