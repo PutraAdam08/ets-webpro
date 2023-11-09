@@ -11,6 +11,19 @@ export const getUser = async(req, res) => {
         console.log(error);
     }
 }
+
+export const getUserByEmail = async(req, res) =>{
+    try {
+        const response = await Users.findOne({
+            where:{
+                Email: req.params.Email
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
  
 export const Register = async(req, res) => {
     const { Name, Email, Password} = req.body;
@@ -67,7 +80,20 @@ export const Login = async(req, res) => {
         console.log("regist not succeed");
     }
 }
- 
+
+export const updateUser = async(req, res) =>{
+    try {
+        await Users.update(req.body,{
+            where:{
+                Email: req.params.Email
+            }
+        });
+        res.status(200).json({msg: "User Updated"});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 export const Logout = async(req, res) => {
     const refreshToken = req.cookies.refreshToken;
     if(!refreshToken) return res.sendStatus(204);

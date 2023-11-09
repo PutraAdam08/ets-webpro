@@ -1,5 +1,10 @@
-module.exports = (sequelize, Sequelize) => {
-    const Recipe = sequelize.define("recipes", {
+import { Sequelize } from "sequelize";
+import db from "../config/Database.js";
+ 
+const { DataTypes } = Sequelize;
+
+
+    const Recipe = db.define("recipes", {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -22,15 +27,18 @@ module.exports = (sequelize, Sequelize) => {
             allowNull:false
             },
         UserEmail: {
-            type: sequelize.STRING(36),
+            type: Sequelize.STRING(36),
             allowNull:false,
             reference:{
                 model:'users',
                 key:'Email'
             }
-        }
-
+        },
+        image: DataTypes.STRING,
+        url: DataTypes.STRING
     });
+    (async () => {
+            await db.sync();
+    })();
   
-    return Recipe;
-  };
+    export default Recipe;

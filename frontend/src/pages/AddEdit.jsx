@@ -5,46 +5,64 @@ import Col from 'react-bootstrap/esm/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class RecipeForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishName: '',
-      ingredients: '',
-      steps: '',
-      imageSrc: null,
-    };
-  }
-
-  handleDishNameChange = (event) => {
-    this.setState({ dishName: event.target.value });
-  };
-
-  handleIngredientsChange = (event) => {
-    this.setState({ ingredients: event.target.value });
-  };
-
-  handleStepsChange = (event) => {
-    this.setState({ steps: event.target.value });
-  };
-
-  handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.setState({ imageSrc: e.target.result });
-      };
-
-      reader.readAsDataURL(file);
+const RecipeForm = () => {
+    const [Name, setName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
+    const [users, setUsers] = useState([]);
+    const [RecipeName, setRecipeName] = useState([]);
+    const [Ingredients, setIngridient] = useState([]);
+    const [Step, setStep] = useState([]);
+    const [RecipeType, setRecipeType] = useState([]);
+    const navigate = useNavigate();
+ 
+    useEffect(() => {
+        refreshToken();
+        getUsers();
+    }, []);
+ 
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/token');
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setName(decoded.Name);
+            setEmail(decoded.Email);
+            setExpire(decoded.exp);
+            console.log(Name);
+        } catch (error) {
+            if (error.response) {
+                navigate("/login");
+            }
+        }
     }
-  };
-
-  render() {
-    const { imageSrc } = this.state;
-
+ 
+    const axiosJWT = axios.create();
+ 
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime()) {
+            const response = await axios.get('http://localhost:5000/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setEmail(decoded.Email);
+            setExpire(decoded.exp);
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+ 
+    const getUsers = async () => {
+        const response = await axiosJWT.get('http://localhost:5000/users', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        setUsers(response.data);
+    }
     return (
       <>
         <div className='container p-5 justify-content-center'>
@@ -123,7 +141,6 @@ class RecipeForm extends Component {
         </div>
       </>
     );
-  }
 }
 
 export default RecipeForm;

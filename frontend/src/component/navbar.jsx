@@ -24,9 +24,9 @@ function BasicNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/homepages">Home</Nav.Link>
             <Nav.Link href="#link">Recipe</Nav.Link>
-            <Nav.Link href="#link">Profile</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link onClick={Logout}><box-icon name='power-off'></box-icon></Nav.Link>
           </Nav>
         </Navbar.Collapse>
